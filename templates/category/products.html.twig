@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ category.name }} pizza overzicht{% endblock %}
+
+{% block body %}
+    <h1>Alle pizza's in de categorie {{ category.name }}</h1>
+    <div class="row gx-3">
+        {%  for pizza in category.products %}
+            <div class="col-12 col-md-6  col-lg-4 col-xl-3 d-flex align-items-stretch">
+                <div class="card mb-3">
+                    <div class="row g-1">
+                        <div class="col-md-4 pt-4 p-2">
+                            <img src="{{ asset(pizza.image) }}" class="img-fluid rounded-start" alt="{{ pizza.name }}">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ pizza.name }}</h5>
+                                <p class="card-text">
+                                    {{ pizza.description }}
+                                </p>
+                                <a href="{{ path('app_product', {'product': pizza.id}) }}" class="btn btn-outline-primary">Bestel!</a>
+                                <a href="{{ path('app_add_shopping_cart', {'id': pizza.id}) }}" class="btn btn-outline-primary">Voeg toe aan winkelwagen!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

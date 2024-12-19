@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ingredienten overzicht{% endblock %}
+
+{% block body %}
+    <h1>Een overzicht van alle ingredienten</h1>
+    <a href="{{ path('app_add_ingredient') }}" class="btn btn-outline-secondary">Voeg ingredient toe</a>
+    <table class="table table-hover table-striped">
+        <thead>
+        <tr>
+            <th>Naam</th>
+            <th>Acties</th>
+        </tr>
+        </thead>
+        <tbody>
+        {%  for ingredient in ingredients %}
+            <tr>
+                <td>{{ ingredient.name }}</td>
+                <td><a href="{{ path('app_view_ingredient', {'id': ingredient.id}) }}" class="btn btn-outline-primary">Bekijk ingredient</a>
+                <a href="{{ path('app_update_ingredient', {'id': ingredient.id}) }}" class="btn btn-outline-success">Update ingredient</a>
+                <a href="{{ path('app_delete_ingredient', {'id': ingredient.id}) }}" class="btn btn-outline-danger">Verwijder ingredient</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bestellingen overzicht{% endblock %}
+
+{% block body %}
+    <h1>Een overzicht van alle bestellingen</h1>
+    {% if orders|length > 0 %}
+        <table class="table table-hover table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Naam</th>
+                <th>Pizza</th>
+                <th>Categorie</th>
+                <th>Totaal prijs</th>
+                <th>Wissen</th>
+            </tr>
+            </thead>
+            <tbody>
+                {%  for order in orders %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.firstname }} {{ order.lastname }}</td>
+                        <td>{{ order.product.name }}</td>
+                        <td>{{ order.product.category.name }}</td>
+                        <td class="text-end">&euro; {{ order.orderprice }}</td>
+                        <td class="pt-1">
+                            <a href="{{ path('app_delete_order', {'order' : order.id}) }}" class="btn btn-sm p-1 btn-outline-danger">Wissen</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h3 class="text-dark">Er zijn geen bestellingen</h3>
+    {% endif %}
+    </div>
+{% endblock %}
